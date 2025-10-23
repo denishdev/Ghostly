@@ -1,8 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
-import { Copy, ClipboardPaste } from "lucide-react";
+import { Copy, ClipboardPaste, Ghost } from "lucide-react";
 import React, { useState } from "react";
 import { toast } from "sonner";
+import { CopyButton } from "./ui/copy-component";
 
 const Hero = () => {
   const [inputText, setInputText] = useState("");
@@ -61,7 +62,7 @@ const Hero = () => {
             className="border rounded-lg w-full flex-grow px-3 py-4 cursor-text text-lg "
             placeholder="Enter your text here..."
           ></textarea>
-          <button 
+          <button
             onClick={handleSummarize}
             className="px-6 py-2 text-white bg-[#55d082] rounded-lg font-bold transform hover:-translate-y-1 transition duration-400 mt-3" >
             Summarize
@@ -79,12 +80,12 @@ const Hero = () => {
             <h2 className="text-lg font-semibold text-black">
               Summary
             </h2>
-            <button
+            <CopyButton
               onClick={handleCopy}
-              className="bg-transparent hover:bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded"
-            >
-              <Copy />
-            </button>
+              content='copy'
+              variant="ghost"
+              size="md"
+            />
           </div>
           <textarea
             value={aiResponse}
