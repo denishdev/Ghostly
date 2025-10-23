@@ -4,7 +4,7 @@ import { Copy, ClipboardPaste } from "lucide-react";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
-const Hero = () => { 
+const Hero = () => {
   const [inputText, setInputText] = useState("");
   const [aiResponse, setAiResponse] = useState(
     "AI summary will appear here..."
@@ -61,10 +61,9 @@ const Hero = () => {
             className="border rounded-lg w-full flex-grow px-3 py-4 cursor-text text-lg "
             placeholder="Enter your text here..."
           ></textarea>
-          <button
+          <button 
             onClick={handleSummarize}
-            className="bg-[#55d082] hover:bg-[#4abf72] text-white font-bold py-2 px-4 rounded mt-2"
-          >
+            className="px-6 py-2 text-white bg-[#55d082] rounded-lg font-bold transform hover:-translate-y-1 transition duration-400 mt-3" >
             Summarize
           </button>
         </motion.div>
@@ -74,11 +73,11 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="border-2 border-[#55d082] rounded-lg p-4 flex flex-col"
+          className="border-2 border-black rounded-lg p-4 flex flex-col"
         >
           <div className="flex justify-between items-center mb-2">
-            <h2 className="text-lg font-semibold text-[#55d082]">
-              AI Response
+            <h2 className="text-lg font-semibold text-black">
+              Summary
             </h2>
             <button
               onClick={handleCopy}
@@ -89,12 +88,14 @@ const Hero = () => {
           </div>
           <textarea
             value={aiResponse}
-            className="border rounded-lg w-full flex-grow p-2 bg-gray-100"
+            className="border rounded-lg w-full flex-grow px-3 py-4 cursor-text text-lg"
             placeholder="AI summary will appear here..."
             readOnly
           ></textarea>
         </motion.div>
       </div>
+
+
     </div>
   );
 };
