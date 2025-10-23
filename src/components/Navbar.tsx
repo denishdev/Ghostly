@@ -20,7 +20,7 @@ const Navbar = () => {
             href='/'
             className={cn(
               'bg-[#55d082] text-white md:border-black ',
-              'font-bold size',
+              'font-bold text-lg',
               'px-4 py-1.5',
               'rounded-full',
               'md:active:border-[0.5px] md:active:border-black active:transition-all active:duration-[10]',
