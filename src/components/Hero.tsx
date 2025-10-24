@@ -1,9 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
-import { Copy, ClipboardPaste, Ghost } from "lucide-react";
+import { ClipboardPaste } from "lucide-react";
 import React, { useState } from "react";
 import { toast } from "sonner";
 import { CopyButton } from "./ui/copy-component";
+import { TextGenerateEffect } from "./ui/text-generation";
 
 const Hero = () => {
   const [inputText, setInputText] = useState("");
@@ -87,12 +88,11 @@ const Hero = () => {
               size="md"
             />
           </div>
-          <textarea
-            value={aiResponse}
-            className="border rounded-lg w-full flex-grow px-3 py-4 cursor-text text-lg outline-none"
-            placeholder="AI summary will appear here..."
-            readOnly
-          ></textarea>
+          <div
+            className="border rounded-lg w-full flex-grow px-3 py-4 cursor-text text-lg outline-none overflow-auto"
+          >
+            <TextGenerateEffect key={aiResponse} words={aiResponse} />
+          </div>        
         </motion.div>
       </div>
 
