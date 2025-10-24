@@ -11,6 +11,7 @@ const Hero = () => {
   const [aiResponse, setAiResponse] = useState(
     "AI summary will appear here..."
   );
+  const [loading, setLoading] = useState(false);
 
   const handlePaste = async () => {
     try {
@@ -31,10 +32,30 @@ const Hero = () => {
     }
   };
 
-  const handleSummarize = () => {
-    setAiResponse(
-      "This is a placeholder summary of the text you entered. The actual summarization logic is not implemented yet."
-    );
+  const handleSummarize = async () => {
+    if (!inputText.trim()) {
+      toast.error("Please enter text to summarize");
+      return;
+    }
+    try {
+      setLoading(true);
+      const res = await fetch("/api/summarize", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: inputText }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || "Summarization failed");
+      }
+      const data = await res.json();
+      setAiResponse(data.summary || "No summary returned");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Summarization error";
+      toast.error(message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -65,8 +86,9 @@ const Hero = () => {
           ></textarea>
           <button
             onClick={handleSummarize}
-            className="px-6 py-2 text-white bg-[#55d082] rounded-lg font-bold transform hover:-translate-y-1 transition duration-400 mt-3" >
-            Summarize
+            disabled={loading}
+            className="px-6 py-2 text-white bg-[#55d082] rounded-lg font-bold transform hover:-translate-y-1 transition duration-400 mt-3 disabled:opacity-60 disabled:cursor-not-allowed" >
+            {loading ? "Summarizing..." : "Summarize"}
           </button>
         </motion.div>
 
