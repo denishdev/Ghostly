@@ -59,7 +59,7 @@ const Hero = () => {
           <textarea
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            className="border rounded-lg w-full flex-grow px-3 py-4 cursor-text text-lg "
+            className="border rounded-lg w-full flex-grow px-3 py-4 cursor-text text-lg outline-none"
             placeholder="Enter your text here..."
           ></textarea>
           <button
@@ -89,7 +89,7 @@ const Hero = () => {
           </div>
           <textarea
             value={aiResponse}
-            className="border rounded-lg w-full flex-grow px-3 py-4 cursor-text text-lg"
+            className="border rounded-lg w-full flex-grow px-3 py-4 cursor-text text-lg outline-none"
             placeholder="AI summary will appear here..."
             readOnly
           ></textarea>
