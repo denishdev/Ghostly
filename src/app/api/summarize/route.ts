@@ -31,14 +31,14 @@ export async function POST(req: Request) {
     let prompt;
     switch (type) {
       case "funny":
-        prompt = `Rewrite the following text in a funny and humorous tone. Correct any grammatical errors. Text:\n\n${text}`;
+        prompt = `Rewrite the following text in a funny and humorous tone. Correct any grammatical errors. You do not write nothing like "Here's your answer" not a single extra word only the rewrited text. Text:\n\n${text}`;
         break;
       case "casual":
-        prompt = `Rewrite the following text in a casual and friendly tone. Correct any grammatical errors. Text:\n\n${text}`;
+        prompt = `Rewrite the following text in a casual and friendly tone. Correct any grammatical errors. You do not write nothing like "Here's your answer" not a single extra word only the rewrited text. Text:\n\n${text}`;
         break;
       case "professional":
       default:
-        prompt = `Rewrite the following text in a professional tone. Correct any grammatical errors. Text:\n\n${text}`;
+        prompt = `Rewrite the following text in a professional tone. Correct any grammatical errors. You do not write nothing like "Here's your answer" not a single extra word only the rewrited text. Text:\n\n${text}`;
         break;
     }
 
