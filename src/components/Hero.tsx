@@ -8,9 +8,8 @@ import { TextGenerateEffect } from "./ui/text-generation";
 
 const Hero = () => {
   const [inputText, setInputText] = useState("");
-  const [aiResponse, setAiResponse] = useState(
-    "AI summary will appear here..."
-  );
+  const [summaryType, setSummaryType] = useState("professional");
+  const [aiResponse, setAiResponse] = useState("Summary will appear here...");
   const [loading, setLoading] = useState(false);
 
   const handlePaste = async () => {
@@ -42,7 +41,7 @@ const Hero = () => {
       const res = await fetch("/api/summarize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: inputText }),
+        body: JSON.stringify({ text: inputText, type: summaryType }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -84,12 +83,28 @@ const Hero = () => {
             className="border rounded-lg w-full flex-grow px-3 py-4 cursor-text text-lg outline-none"
             placeholder="Enter your text here..."
           ></textarea>
-          <button
-            onClick={handleSummarize}
-            disabled={loading}
-            className="px-6 py-2 text-white bg-[#55d082] rounded-lg font-bold transform hover:-translate-y-1 transition duration-400 mt-3 disabled:opacity-60 disabled:cursor-not-allowed" >
-            {loading ? "Summarizing..." : "Summarize"}
-          </button>
+          <div className="flex items-center justify-between mt-3">
+            <div className="flex items-center gap-2">
+              <label className="font-semibold">Tone:</label>
+              <select
+                id="summary-type"
+                value={summaryType}
+                onChange={(e) => setSummaryType(e.target.value)}
+                className="border rounded-lg px-2 py-1 cursor-pointer outline-none"
+              >
+                <option value="professional">Professional</option>
+                <option value="casual">Casual</option>
+                <option value="funny">Funny</option>
+              </select>
+            </div>
+            <button
+              onClick={handleSummarize}
+              disabled={loading}
+              className="px-6 py-2 text-white bg-[#55d082] rounded-lg font-bold transform hover:-translate-y-1 transition duration-400 disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {loading ? "Summarizing..." : "Summarize"}
+            </button>
+          </div>
         </motion.div>
 
         {/* Second Box */}
