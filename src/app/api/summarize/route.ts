@@ -5,7 +5,7 @@ export const runtime = "edge";
 
 export async function POST(req: Request) {
   try {
-    const { text } = await req.json();
+    const { text, type } = await req.json();
 
     if (!text || typeof text !== "string" || !text.trim()) {
       return NextResponse.json(
@@ -28,7 +28,19 @@ export async function POST(req: Request) {
       model: "gemini-2.0-flash-lite",
     });
 
-    const prompt = `Summarize the following text in 3-5 short bullet points. Be concise and avoid fluff. If the text contains code or lists, keep key items. Text:\n\n${text}`;
+    let prompt;
+    switch (type) {
+      case "funny":
+        prompt = `Rewrite the following text in a funny and humorous tone. Correct any grammatical errors. Text:\n\n${text}`;
+        break;
+      case "casual":
+        prompt = `Rewrite the following text in a casual and friendly tone. Correct any grammatical errors. Text:\n\n${text}`;
+        break;
+      case "professional":
+      default:
+        prompt = `Rewrite the following text in a professional tone. Correct any grammatical errors. Text:\n\n${text}`;
+        break;
+    }
 
     const result = await model.generateContent({
       contents: [
