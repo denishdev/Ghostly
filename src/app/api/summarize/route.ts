@@ -37,6 +37,8 @@ export async function POST(req: Request) {
         prompt = `Rewrite the following text in a casual and friendly tone. Correct any grammatical errors. You do not write nothing like "Here's your answer" not a single extra word only the rewrited text. Text:\n\n${text}`;
         break;
       case "professional":
+        prompt = `Rewrite the following text in a professional tone that we can directly send to some other professional person. Correct any grammatical errors. You do not write nothing like "Here's your answer" not a single extra word only the rewrited text. Text:\n\n${text}`;
+        break;
       default:
         prompt = `Rewrite the following text in a professional tone that we can directly send to some other professional person. Correct any grammatical errors. You do not write nothing like "Here's your answer" not a single extra word only the rewrited text. Text:\n\n${text}`;
         break;
